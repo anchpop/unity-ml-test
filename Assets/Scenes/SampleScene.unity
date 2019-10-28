@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2035111234}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 6.072514, g: 8.598101, b: 13.655434, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -151,7 +151,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168218571}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.1802263, y: 5.33, z: 1.8101134}
+  m_LocalPosition: {x: 5.180257, y: 5.33, z: 1.8101287}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 405591765}
@@ -805,7 +805,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1037846703}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16.370909, y: 5.27, z: -0.69000053}
+  m_LocalPosition: {x: 16.37103, y: 5.27, z: -0.69000053}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 405591765}
@@ -1481,8 +1481,7 @@ MonoBehaviour:
   broadcastHub:
     broadcastingBrains:
     - {fileID: 11400000, guid: f1e946c1e8a69c449871ac378b6c9671, type: 2}
-    m_BrainsToControl:
-    - {fileID: 11400000, guid: f1e946c1e8a69c449871ac378b6c9671, type: 2}
+    m_BrainsToControl: []
   m_TrainingConfiguration:
     width: 80
     height: 80
@@ -2064,7 +2063,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2059789766}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.6509075, y: 2.8, z: 6.810454}
+  m_LocalPosition: {x: 14.65103, y: 2.8, z: 6.810515}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 405591765}

@@ -71,7 +71,7 @@ public class RollerAgent : Agent
         shootDir.x = vectorAction[3];
         shootDir.z = vectorAction[4];
 
-        if (shootWillingness > .5 && Time.time - lastShootTime > 1)
+        if (shootWillingness > .5 && Time.time - lastShootTime > 2)
         {
             lastShootTime = Time.time;
             this.rBody.angularVelocity = this.rBody.angularVelocity * (1 - boltEnergy);

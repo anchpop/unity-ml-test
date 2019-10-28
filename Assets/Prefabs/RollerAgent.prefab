@@ -119,8 +119,10 @@ MonoBehaviour:
   OtherAgent: {fileID: 0}
   arena: {fileID: 0}
   lastShootTime: 0
+  lastRestartTime: 0
   speed: 10
   boltSpeed: 10
+  boltEnergy: -0.05
   bolt: {fileID: 8148932713917414193, guid: 069229302cbf35f4b93e17e1960b6886, type: 3}
 --- !u!54 &125962487476662408
 Rigidbody:
@@ -137,4 +139,4 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
