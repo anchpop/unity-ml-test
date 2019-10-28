@@ -24,5 +24,5 @@ MonoBehaviour:
     - xshoot
     - yshoot
     vectorActionSpaceType: 1
-  model: {fileID: 5022602860645237092, guid: b8ddc316d53cacc47ad03881cd017f5f, type: 3}
+  model: {fileID: 5022602860645237092, guid: c68ab47ebab680a47b97b8a8bb2c0f53, type: 3}
   inferenceDevice: 0

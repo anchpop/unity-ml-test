@@ -15,19 +15,18 @@ public class RollerAgent : Agent
     public Transform OtherAgent;
     public ArenaController arena;
     public float lastShootTime;
+    public float lastRestartTime;
     public override void AgentReset()
     {
+        // Reset the last shoot time
         lastShootTime = Time.time;
-        if (this.transform.localPosition.y < 0)
-        {
-            // If the Agent fell, zero its momentum
-            this.transform.localPosition    = new Vector3(0, 0.5f, 0);
-        }
 
+        // Reset angular velocity, and randomize real velocity
         this.rBody.angularVelocity = Vector3.zero;
         this.rBody.velocity = new Vector3(Mathf.Lerp(-3, 3, Random.value),
                                           0f,
                                           Mathf.Lerp(-3, 3, Random.value));
+        
         // Move the target to a new spot
         Target.localPosition = new Vector3(Mathf.Lerp(-8, 5, Random.value),
                                            1f,
@@ -37,10 +36,9 @@ public class RollerAgent : Agent
     public override void CollectObservations()
     {
         // Rewards
-        float distanceToTarget = Vector3.Distance(this.transform.localPosition,
-                                                  Target.position);
-        float otherDistanceToTarget = Vector3.Distance(OtherAgent.transform.localPosition,
-                                                  Target.position);
+        float distanceToTarget      = Vector3.Distance(this      .transform.localPosition, Target.position);
+        float otherDistanceToTarget = Vector3.Distance(OtherAgent.transform.localPosition, Target.position);
+
         // Target and Agent positions
         AddVectorObs(Target.position);
         AddVectorObs(this.transform.localPosition);
@@ -60,19 +58,18 @@ public class RollerAgent : Agent
     public GameObject bolt;
     public override void AgentAction(float[] vectorAction, string textAction)
     {
-        // Actions, size = 2
+        // Get outputs and use to control direction
         Vector3 controlSignal = Vector3.zero;
         controlSignal.x = vectorAction[0];
         controlSignal.z = vectorAction[1];
 
-
+        // Get output and if it's over .5, we'll shoot
         float shootWillingness = vectorAction[2];
 
+        // This is the direction to shoot in (only relevant if previous is over .5)
         Vector3 shootDir = Vector3.zero;
         shootDir.x = vectorAction[3];
         shootDir.z = vectorAction[4];
-
-        print(shootWillingness);
 
         if (shootWillingness > .5 && Time.time - lastShootTime > 1)
         {
@@ -105,24 +102,21 @@ public class RollerAgent : Agent
         }
 
 
-        // Rewards
-        float      distanceToTarget = Vector3.Distance(this      .transform.localPosition,
-                                                  Target.position);
-        float otherDistanceToTarget = Vector3.Distance(OtherAgent.transform.localPosition,
-                                                  Target.position);
+        // Reward
+        float distanceToTarget = Vector3.Distance(this.transform.localPosition, Target.localPosition);
 
-        // Reached target
-        SetReward(-(Mathf.Sqrt(distanceToTarget) * 3) + (Mathf.Sqrt(otherDistanceToTarget) * .2f) + (shootWillingness > .5 ? 10 : 0));
-        //SetReward(-(Mathf.Sqrt(distanceToTarget) * 3));
+        // Hit the target!
         if (distanceToTarget < 1.42f)
         {
-            SetReward(100);
+            lastRestartTime = Time.time;
+            SetReward(1);
             Done();
         }
 
-        // Fell off platform
-        if (this.transform.localPosition.y < 0)
+        // Taking too long, just restart
+        if (Time.time - lastRestartTime > 500)
         {
+            lastRestartTime = Time.time;
             Done();
         }
 
